@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
-import { Logo } from "../images/Netflix";
+import Logo from "../images/Netflix";
 import { ConnectButton, Icon, TabList, Tab } from "web3uikit";
 
 const Home = () => {
   return (
     <>
-      <div className="flex justify-center align-center">
+      <div className="logo">
         <Logo />
       </div>
       <div className="connect">
