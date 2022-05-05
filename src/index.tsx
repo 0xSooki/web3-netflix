@@ -5,14 +5,15 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { MoralisProvider } from "react-moralis";
+// import { NotificationProvider } from "web3uikit";
 import reportHandler from "./reportHandler";
 
 ReactDOM.render(
   <React.StrictMode>
     <MoralisProvider appId="xxxxx" serverUrl="xxxxx">
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
     </MoralisProvider>
   </React.StrictMode>,
   document.getElementById("root")
