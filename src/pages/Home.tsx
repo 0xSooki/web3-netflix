@@ -30,15 +30,13 @@ const Home = () => {
               <div className="playButton">
                 <Button
                   id="test-button-primary"
-                  onClick={function noRefCheck() {}}
-                  text="Primary Button"
+                  text="Play"
                   theme="secondary"
                   type="button"
                 />
                 <Button
                   id="test-button-primary"
-                  onClick={function noRefCheck() {}}
-                  text="Primary Button"
+                  text="Add to my list"
                   theme="translucent"
                   type="button"
                 />
@@ -79,39 +77,35 @@ const Home = () => {
                 <img src={selectedMovie.Scene} className="modalImg" alt="" />
                 <img src={selectedMovie.Logo} className="modalLogo" alt="" />
                 <div className="modalPlayButton">
-                <Button
-                  id="test-button-primary"
-                  onClick={function noRefCheck() {}}
-                  text="Primary Button"
-                  theme="secondary"
-                  type="button"
-                />
-                <Button
-                  id="test-button-primary"
-                  onClick={function noRefCheck() {}}
-                  text="Primary Button"
-                  theme="translucent"
-                  type="button"
-                />
-              </div>
-              <div className="movieInfo">
-                <div className="description">
-                  <div className="details">
-                    <span>{selectedMovie.Year}</span>
-                    <span>{selectedMovie.Duration}</span>
+                  <Link to="/player" state={selectedMovie.Movie}>
+                    <Button
+                      id="test-button-primary"
+                      text="Play"
+                      theme="secondary"
+                      type="button"
+                    />
+                  </Link>
+                  <Button
+                    id="test-button-primary"
+                    text="Add to my list"
+                    theme="translucent"
+                    type="button"
+                  />
+                </div>
+                <div className="movieInfo">
+                  <div className="description">
+                    <div className="details">
+                      <span>{selectedMovie.Year}</span>
+                      <span>{selectedMovie.Duration}</span>
+                    </div>
+                    {selectedMovie.Description}
                   </div>
-                  {selectedMovie.Description}
+                  <div className="detailedInfo">
+                    Genre: <span className="deets">{selectedMovie.Genre}</span>
+                    <br />
+                    Actors: <span className="deets">{selectedMovie.Actors}</span>
+                  </div>
                 </div>
-                <div className="detailedInfo">
-                  Genre: <span className="deets">
-                    {selectedMovie.Genre}
-                  </span>
-                  <br />
-                  Actors: <span className="deets">
-                    {selectedMovie.Actors}
-                  </span>
-                </div>
-              </div>
               </div>
             </Modal>
           </div>
