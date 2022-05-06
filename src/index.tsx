@@ -7,13 +7,23 @@ import { BrowserRouter } from "react-router-dom";
 import { MoralisProvider } from "react-moralis";
 // import { NotificationProvider } from "web3uikit";
 import reportHandler from "./reportHandler";
+import dotenv from "dotenv";
+import { NotificationProvider } from "web3uikit";
+dotenv.config();
 
 ReactDOM.render(
   <React.StrictMode>
-    <MoralisProvider appId="xxxxx" serverUrl="xxxxx">
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+    <MoralisProvider
+      appId={process.env.APP_ID!}
+      serverUrl={
+        process.env.SERVER_URL!
+      }
+    >
+      <NotificationProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+      </NotificationProvider>
     </MoralisProvider>
   </React.StrictMode>,
   document.getElementById("root")
