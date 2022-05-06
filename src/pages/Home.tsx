@@ -1,15 +1,38 @@
 import { Link } from "react-router-dom";
 import "./Home.css";
 import Logo from "../images/Netflix";
-import { ConnectButton, Icon, TabList, Tab, Button, Modal } from "web3uikit";
+import {
+  ConnectButton,
+  Icon,
+  TabList,
+  Tab,
+  Button,
+  Modal,
+  useNotification,
+} from "web3uikit";
 import { movies } from "../helpers/library";
 import React from "react";
 import { useState } from "react";
 import { Movie } from "../types/types";
+import { useMoralis } from "react-moralis";
+import PlayButton from "../components/PlayButton";
+import AddToMyListButton from "../components/AddToMyListButton";
 
 const Home = () => {
   const [visible, setVisible] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState<Movie>();
+  const { isAuthenticated } = useMoralis();
+
+  const dispatch = useNotification();
+
+  const handleNewNotification = () => {
+    dispatch({
+      type: "error",
+      message: "Please connect your crypto wallet",
+      title: "Not Authenticated",
+      position: "topL",
+    });
+  };
 
   return (
     <>
@@ -28,18 +51,20 @@ const Home = () => {
               <img src={movies[0].Logo} className="sceneLogo" alt="" />
               <p className="sceneDesc">{movies[0].Description}</p>
               <div className="playButton">
-                <Button
-                  id="test-button-primary"
-                  text="Play"
-                  theme="secondary"
-                  type="button"
-                />
-                <Button
-                  id="test-button-primary"
-                  text="Add to my list"
-                  theme="translucent"
-                  type="button"
-                />
+                {isAuthenticated ? (
+                  <>
+                    <Link to="/player" state={movies[0].Movie}>
+                      <PlayButton />
+                    </Link>
+
+                    <AddToMyListButton />
+                  </>
+                ) : (
+                  <>
+                    <PlayButton click={handleNewNotification} />
+                    <AddToMyListButton click={handleNewNotification} />
+                  </>
+                )}
               </div>
             </div>
             <div className="title">Movies</div>
@@ -77,20 +102,19 @@ const Home = () => {
                 <img src={selectedMovie.Scene} className="modalImg" alt="" />
                 <img src={selectedMovie.Logo} className="modalLogo" alt="" />
                 <div className="modalPlayButton">
-                  <Link to="/player" state={selectedMovie.Movie}>
-                    <Button
-                      id="test-button-primary"
-                      text="Play"
-                      theme="secondary"
-                      type="button"
-                    />
-                  </Link>
-                  <Button
-                    id="test-button-primary"
-                    text="Add to my list"
-                    theme="translucent"
-                    type="button"
-                  />
+                  {isAuthenticated ? (
+                    <>
+                      <Link to="/player" state={selectedMovie.Movie}>
+                        <PlayButton />
+                      </Link>
+                      <AddToMyListButton />
+                    </>
+                  ) : (
+                    <>
+                      <PlayButton click={handleNewNotification} />
+                      <AddToMyListButton click={handleNewNotification} />
+                    </>
+                  )}
                 </div>
                 <div className="movieInfo">
                   <div className="description">

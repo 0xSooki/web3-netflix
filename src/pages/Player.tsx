@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import "./Player.css";
-import { Button, Icon } from "web3uikit";
-import { iconTypes } from "web3uikit";
+import { Button } from "web3uikit";
 
 const Player = () => {
   const { state: currentlyPlaying } = useLocation();
